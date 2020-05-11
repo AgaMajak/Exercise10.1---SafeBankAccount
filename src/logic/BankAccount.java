@@ -45,34 +45,33 @@ public class BankAccount {
         int i = 0;
 
         while (i < 1) {
-                Scanner scan = new Scanner(System.in);
-                System.out.println("Jaką akcję chcesz wykonać? Wpisz: 'wpłać' lub 'wypłać' aby wpłacić, lub wypłacić pieniądze. " +
-                        "Wpisz: 'stan konta', aby sprawdzić stan konta. Jeżeli nie chcesz wykonywać żadnej akcji wpisz: 'koniec'.");
-                String action = scan.nextLine();
-                switch (action) {
-                    case "wypłać":
-                        System.out.println("Ile chcesz wypłacić?");
-                        double withrawalAmount = scan.nextDouble();
-                        withdraw(withrawalAmount);
-                        break;
-                    case "wpłać":
-                        System.out.println("Ile chcesz wpłacić?");
-                        double paymentAmount = scan.nextDouble();
-                        deposit(paymentAmount);
-                        break;
-                    case "stan konta":
-                        System.out.printf("%.2fzł\n", accountBalance);
-                        break;
-                    case "koniec":
-                        i = 1;
-                        break;
-                    default:
-                        System.out.println("Błędnie podane polecenie. Wpisz jeszcze raz.");
-                        break;
-                }
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Jaką akcję chcesz wykonać? Wpisz: 'wpłać' lub 'wypłać' aby wpłacić, lub wypłacić pieniądze. " +
+                    "Wpisz: 'stan konta', aby sprawdzić stan konta. Jeżeli nie chcesz wykonywać żadnej akcji wpisz: 'koniec'.");
+            String action = scan.nextLine();
+            switch (action) {
+                case "wypłać":
+                    System.out.println("Ile chcesz wypłacić?");
+                    double withrawalAmount = scan.nextDouble();
+                    withdraw(withrawalAmount);
+                    break;
+                case "wpłać":
+                    System.out.println("Ile chcesz wpłacić?");
+                    double paymentAmount = scan.nextDouble();
+                    deposit(paymentAmount);
+                    break;
+                case "stan konta":
+                    System.out.printf("%.2fzł\n", accountBalance);
+                    break;
+                case "koniec":
+                    i = 1;
+                    break;
+                default:
+                    System.out.println("Błędnie podane polecenie. Wpisz jeszcze raz.");
+                    break;
             }
         }
-
+    }
 
 
     public String toString() {

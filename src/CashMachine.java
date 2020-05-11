@@ -22,7 +22,7 @@ public class CashMachine {
             System.err.println(e.getMessage());
         } catch (TooBigWithdrawalAmountException | MaxWithdrawalAmountExceededException e) {
             System.out.println(e.getMessage());
-        } catch (InputMismatchException e){
+        } catch (InputMismatchException e) {
             System.out.println("Błędna kwota, spróbuj ponownie.");
         }
     }
