@@ -24,36 +24,27 @@ public class BankAccount {
     }
 
     private void deposit(double paymentAmount) {
-        try {
-            if (paymentAmount < 0) {
-                throw new IllegalArgumentException("Kwota nie może być mniejsza niż 0.");
-            }
-            accountBalance += paymentAmount;
-        } catch (IllegalArgumentException e) {
-            System.err.println(e.getMessage());
+        if (paymentAmount < 0) {
+            throw new IllegalArgumentException("Kwota nie może być mniejsza niż 0.");
         }
+        accountBalance += paymentAmount;
     }
 
-    private void withdraw(double withdrawalAmount) {
-        try {
-            if (withdrawalAmount > accountBalance) {
-                throw new TooBigWithdrawalAmountException(withdrawalAmount, accountBalance);
-            } else if (withdrawalAmount > MAX_WITHDRAWAL_AMOUNT) {
-                throw new MaxWithdrawalAmountExceededException(withdrawalAmount, MAX_WITHDRAWAL_AMOUNT);
-            } else if (withdrawalAmount < 0) {
-                throw new IllegalArgumentException("Kwota nie może być mniejsza niż 0.");
-            }
-            accountBalance -= withdrawalAmount;
-        } catch (TooBigWithdrawalAmountException | MaxWithdrawalAmountExceededException | IllegalArgumentException e) {
-            System.err.println(e.getMessage());
+    private void withdraw(double withdrawalAmount) throws TooBigWithdrawalAmountException, MaxWithdrawalAmountExceededException {
+        if (withdrawalAmount > accountBalance) {
+            throw new TooBigWithdrawalAmountException(withdrawalAmount, accountBalance);
+        } else if (withdrawalAmount > MAX_WITHDRAWAL_AMOUNT) {
+            throw new MaxWithdrawalAmountExceededException(withdrawalAmount, MAX_WITHDRAWAL_AMOUNT);
+        } else if (withdrawalAmount < 0) {
+            throw new IllegalArgumentException("Kwota nie może być mniejsza niż 0.");
         }
+        accountBalance -= withdrawalAmount;
     }
 
-    public void withdrawOrDepositByUserInput() {
+    public void withdrawOrDepositByUserInput() throws MaxWithdrawalAmountExceededException, TooBigWithdrawalAmountException {
         int i = 0;
 
         while (i < 1) {
-            try {
                 Scanner scan = new Scanner(System.in);
                 System.out.println("Jaką akcję chcesz wykonać? Wpisz: 'wpłać' lub 'wypłać' aby wpłacić, lub wypłacić pieniądze. " +
                         "Wpisz: 'stan konta', aby sprawdzić stan konta. Jeżeli nie chcesz wykonywać żadnej akcji wpisz: 'koniec'.");
@@ -79,11 +70,9 @@ public class BankAccount {
                         System.out.println("Błędnie podane polecenie. Wpisz jeszcze raz.");
                         break;
                 }
-            } catch (InputMismatchException e) {
-                System.err.println("Błędnie wpisałeś polecenie. Spróbuj jeszcze raz.");
             }
         }
-    }
+
 
 
     public String toString() {

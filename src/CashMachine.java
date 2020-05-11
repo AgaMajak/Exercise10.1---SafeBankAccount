@@ -1,5 +1,9 @@
 import data.Person;
+import exceptions.MaxWithdrawalAmountExceededException;
+import exceptions.TooBigWithdrawalAmountException;
 import logic.BankAccount;
+
+import java.util.InputMismatchException;
 
 public class CashMachine {
     public static void main(String[] args) {
@@ -14,8 +18,12 @@ public class CashMachine {
             System.out.println(bankAccount);
             bankAccount.withdrawOrDepositByUserInput();
             System.out.println(bankAccount);
-        } catch (NullPointerException e) {
+        } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
+        } catch (TooBigWithdrawalAmountException | MaxWithdrawalAmountExceededException e) {
+            System.out.println(e.getMessage());
+        } catch (InputMismatchException e){
+            System.out.println("Błędna kwota, spróbuj ponownie.");
         }
     }
 }
